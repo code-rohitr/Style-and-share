@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,100,500);
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,300,100,500");
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Sacramento&display=swap");
 
 /* font-family: 'Poppins', sans-serif;
@@ -256,12 +256,11 @@ a {
   flex-flow: column;
   box-shadow: 0px 15px 50px 10px rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
-  height: auto;
+  height: 560px;
   width: 360px;
   background: #fff;
   background: url("https://pexels.imgix.net/photos/27718/pexels-photo-27718.jpg?fit=crop&w=1280&h=823")
     top left no-repeat;
-    /* border: 2px solid red; */
     border-radius: 11px;
 }
 
@@ -270,11 +269,11 @@ a {
   background: linear-gradient(#8ca6db, #b993d6);
   opacity: 0.85;
   filter: alpha(opacity=85);
-  height: 100%;
+  height: 560px;
   position: absolute;
   width: 360px;
   z-index: 1;
-    border-radius: 11px;
+  border-radius: 11px;
 }
 
 .bold-line {
