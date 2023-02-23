@@ -23,7 +23,7 @@ class DB {
         $conn = mysqli_connect($host, $user, $pass, $db);
 
         if ($conn) {
-            $this->$dbconn = $conn;
+            $this->dbconn = $conn;
             return $conn;
         } else {
             throw new Exception(mysqli_connect_error());
@@ -43,11 +43,23 @@ class DB {
     }
 
     function insert($query, $connection) {
+        $c = $connection ? $connection : $this->dbconn;
+        $r = mysqli_query($query, $c);
+    }
 
+    function insert_and_return($query, $connection) {
+        $c = $connection ? $connection : $this->dbconn;
+        $r = mysqli_query($query, $c);
     }
 
     function update($query, $connection) {
+        $c = $connection ? $connection : $this->dbconn;
+        $r = mysqli_query($query, $c);
+    }
 
+    function update_and_return($query, $connection) {
+        $c = $connection ? $connection : $this->dbconn;
+        $r = mysqli_query($query, $c);
     }
 
     function close() {

@@ -6,7 +6,7 @@ include('lib/partials/head.php');
 <div class='container'>
   <div class='window'>
     <div class='overlay'></div>
-    <form class='content' method="POST" action="connect.php">
+    <form class='content' method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
       <div class='welcome'>Hello There!</div>
       <div class='subtitle'>Register here and get started.</div>
       <div class='input-fields'>

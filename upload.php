@@ -1,11 +1,58 @@
 <?php
+include('lib/methods/auth.php');
+
+$a = Auth::isAuthenticated();
+
+if ($a) {
+?>
+
+<?php
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+	if (isset($_POST['submit'])) {
+	
+		include('lib/utils/db.php');
+	
+		try {
+			$db = new DB();
+			$conn = $db->connect();
+	
+		} catch (Exception $e) {
+			echo $e;
+		}
+	
+		$file = $_FILES['uploadImg'];
+		$fsize = filesize($file['tmp_name']);
+		$fname = basename($file['name']);
+	
+		$name = $_POST['name'];
+		$size = $_POST['size'];
+		$price = $_POST['price'];
+		$description = $_POST['description'];
+		$brand = 'Adidas';
+		$category = 'accessory';
+		$fmaterial = 'Cotton';
+		$color = 'Black';
+		$owner = 1;
+		$imgurl = '';
+	
+		$query = "INSERT INTO 
+		`items` (`owner`, `name`, `category`, `description`, `size`, `price`, `image`,`fmaterial`, `color`, `brand`) 
+		VALUES 
+		($owner, '$name', '$category', '$description', '$size', '$price', '$imgurl', '$fmaterial', '$color', '$brand')";
+	
+	}
+}
+
+?>
+
+<?php
 include('lib/partials/head.php');
 ?>
 	<div class='bold-line'></div>
 	<div class='container'>
 		<div class='window'>
 			<div class='overlay'></div>
-			<form class='content' method="POST" action="./upload.php" enctype="multipart/form-data">
+			<form class='content' method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" enctype="multipart/form-data">
 				<div class='welcome'>Upload</div>
 				<div class='subtitle'>Enter the details of your product.</div>
 				<div class='input-fields'>
@@ -23,8 +70,7 @@ include('lib/partials/head.php');
 					<input style="display: none;" type="file" id="uploadImg" name="uploadImg" />
 					<button class='ghost-round full-width' type="button" onclick="acceptFile()">Upload</button>
 				</div>
-				<input type="submit" name="submit" value="Submit"
-					style="border: 1px solid black;padding: 1rem;cursor: pointer;" />
+				<button type="submit" style="border: 1px solid black;padding: 1rem;cursor: pointer;">Submit</button>
 			</form>
 		</div>
 	</div>
@@ -37,4 +83,9 @@ include('lib/partials/head.php');
 	</script>
 <?php
 include('lib/partials/footer.php');
+?>
+<?php
+} else {
+	Auth::redirectToLogin('./login.php');
+}
 ?>

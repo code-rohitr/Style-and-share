@@ -1,7 +1,5 @@
 <?php
 
-include('lib/partials/head.php');
-
 include('lib/methods/auth.php');
 
 try {
@@ -10,9 +8,19 @@ try {
     echo $e;
 }
 
+if ($auth) {
+?>
 
+<?php
+include('lib/partials/head.php');
+?>
 
-
+<?php
 include('lib/partials/footer.php');
+?>
 
+<?php
+} else {
+    Auth::redirectToLogin('./login.php');
+}
 ?>

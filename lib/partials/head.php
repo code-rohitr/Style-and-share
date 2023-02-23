@@ -9,3 +9,5 @@
         <link rel="stylesheet" href="./lib/css/register.css?v=<?php echo time(); ?>">
         <link rel="stylesheet" href="./lib/css/upload.css">
     </head>
+    <body>
+        <?php include('nav.php'); ?>
