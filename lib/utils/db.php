@@ -14,7 +14,7 @@ class DB {
         $this->dbpassword = 'style_n_share';
     }
 
-    function connect() {
+    public function connect() {
         $db = $this->dbname;
         $host = $this->dbhost;
         $user = $this->dbuser;
@@ -30,36 +30,39 @@ class DB {
         }
     }
 
-    function getCurrentConnection() {
+    public function getCurrentConnection() {
         return $this->dbconn;
     }
 
-    function select($query, $connection) {
-        $c = $connection ? $connection : $this->dbconn;
+    public function select($query, $connection) {
+        $c = $connection ?? $this->dbconn;
 
-        $r = mysqli_query($query, $c);
+        $r = mysqli_query($c, $query);
 
         
     }
 
-    function insert($query, $connection) {
-        $c = $connection ? $connection : $this->dbconn;
-        $r = mysqli_query($query, $c);
+    public function insert($query, $connection) {
+        $c = $connection ?? $this->dbconn;
+
+        $r = mysqli_query($c, $query);
+
+        return $r;
     }
 
     function insert_and_return($query, $connection) {
-        $c = $connection ? $connection : $this->dbconn;
-        $r = mysqli_query($query, $c);
+        $c = $connection ?? $this->dbconn;
+        $r = mysqli_query($c, $query);
     }
 
     function update($query, $connection) {
-        $c = $connection ? $connection : $this->dbconn;
-        $r = mysqli_query($query, $c);
+        $c = $connection ?? $this->dbconn;
+        $r = mysqli_query($c, $query);
     }
 
     function update_and_return($query, $connection) {
-        $c = $connection ? $connection : $this->dbconn;
-        $r = mysqli_query($query, $c);
+        $c = $connection ?? $this->dbconn;
+        $r = mysqli_query($c, $query);
     }
 
     function close() {

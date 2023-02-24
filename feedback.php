@@ -4,25 +4,26 @@ include('lib/methods/auth.php');
 $a = Auth::isAuthenticated();
 
 if ($a) {
-?>
+	?>
 
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    include('lib/utils/db.php');
-    
-    try {
-        $db = new DB();
-        $db->connect();
-        
-        $content = $_POST['feedback'];
-        $uid = Auth::currentUser();
-    
-        $query = "INSERT INTO `feedback` (`uid`, `content`) VALUES ('$uid', '$content')";
-    
-        $db->insert($query);
+	
+	// include('lib/utils/db.php');
+	$uid = Auth::currentUser();
+	$content = $_POST['feedback'];
+	$query = "INSERT INTO `feedback` (`uid`, `content`) VALUES ($uid, '$content')";
 
+    try {
+		$db = new DB();
+        $conn = $db->connect();
+        
+		$r = $db->insert($query, $conn);
+		if (!$r) {
+			throw new Exception(mysqli_error($conn));
+		}
     } catch (Exception $e) {
-        echo $e;
+		echo $e;
     }
 }
 ?>
