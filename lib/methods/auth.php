@@ -31,7 +31,7 @@ class Auth {
 
     private function authenticate($user) {
         if ($user) {
-            $id = $user->aid ? $user->aid : $user->uid;
+            $id = $user['aid'] ? $user['aid'] : $user['uid'];
 
             $_SESSION['user'] = $id;
             return true;

@@ -50,7 +50,7 @@ class DB {
             throw new Exception($e);
         }
 
-        return $r->fetch_all();
+        return $r->fetch_assoc();
     }
 
     // public function select_one($query, $connection) {
