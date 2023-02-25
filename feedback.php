@@ -7,7 +7,7 @@ try {
     echo $e;
 }
 
-if ($a) {
+if ($auth) {
 	?>
 
 <?php

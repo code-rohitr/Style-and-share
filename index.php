@@ -14,7 +14,7 @@ if ($auth) {
 <?php
 include('lib/partials/head.php');
 ?>
-
+<h1>Welcome user</h1>
 <?php
 include('lib/partials/footer.php');
 ?>

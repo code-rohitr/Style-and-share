@@ -15,7 +15,7 @@ include(__DIR__.'/../lib/partials/head.php');
 <?php
 include(__DIR__.'/../lib/partials/footer.php');
 ?>
-
+<h1>Welcome Admin</h1>
 <?php
 } else {
     Auth::redirectToLogin('./login.php');

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Feb 23, 2023 at 12:35 PM
+-- Generation Time: Feb 25, 2023 at 06:26 AM
 -- Server version: 5.7.26
 -- PHP Version: 7.4.2
 
@@ -33,6 +33,13 @@ CREATE TABLE `admin` (
   `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`aid`, `name`, `email`, `password`) VALUES
+(2, 'Admin', 'admin@admin.com', 'db69fc039dcbd2962cb4d28f5891aae1');
+
 -- --------------------------------------------------------
 
 --
@@ -41,10 +48,17 @@ CREATE TABLE `admin` (
 
 CREATE TABLE `feedback` (
   `fid` int(11) NOT NULL,
-  `content` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `name` varchar(255) NOT NULL
+  `uid` int(11) NOT NULL,
+  `content` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `feedback`
+--
+
+INSERT INTO `feedback` (`fid`, `uid`, `content`) VALUES
+(1, 1, 'hello'),
+(5, 1, 'hellof');
 
 -- --------------------------------------------------------
 
@@ -126,7 +140,8 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` VALUES(1, 'Yuv', 'some@yuv.com', '123456', 'yuv', 987654321);
+INSERT INTO `users` (`uid`, `name`, `email`, `password`, `username`, `contact`) VALUES
+(1, 'Yuv', 'some@yuv.com', '123456', 'yuv', 987654321);
 
 --
 -- Indexes for dumped tables
@@ -142,7 +157,8 @@ ALTER TABLE `admin`
 -- Indexes for table `feedback`
 --
 ALTER TABLE `feedback`
-  ADD PRIMARY KEY (`fid`);
+  ADD PRIMARY KEY (`fid`),
+  ADD KEY `uid` (`uid`);
 
 --
 -- Indexes for table `items`
@@ -190,13 +206,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `aid` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `aid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `feedback`
 --
 ALTER TABLE `feedback`
-  MODIFY `fid` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `fid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `items`
@@ -231,6 +247,12 @@ ALTER TABLE `users`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `feedback`
+--
+ALTER TABLE `feedback`
+  ADD CONSTRAINT `feedback_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `users` (`uid`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `items`

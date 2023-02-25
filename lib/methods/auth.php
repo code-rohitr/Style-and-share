@@ -3,6 +3,7 @@
 include(__DIR__.'/../utils/db.php');
 
 session_start();
+// $_SESSION['user'] = 10;
 class Auth {
     private $db;
 
