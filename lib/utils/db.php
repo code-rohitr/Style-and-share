@@ -34,15 +34,34 @@ class DB {
         return $this->dbconn;
     }
 
-    public function select($query, $connection) {
+    public function clean_str($string, $connection=null) {
+        $c = $connection ?? $this->dbconn;
+        return mysqli_escape_string($c ,$string);
+    }
+
+    public function select($query, $connection=null) {
         $c = $connection ?? $this->dbconn;
 
         $r = mysqli_query($c, $query);
 
-        
+        $e = mysqli_error($c);
+
+        if ($e) {
+            throw new Exception($e);
+        }
+
+        return $r->fetch_all();
     }
 
-    public function insert($query, $connection) {
+    // public function select_one($query, $connection) {
+    //     $c = $connection ?? $this->dbconn;
+
+    //     $r = mysqli_query($c, $query);
+
+    //     return $r->fetch();
+    // }
+
+    public function insert($query, $connection=null) {
         $c = $connection ?? $this->dbconn;
 
         $r = mysqli_query($c, $query);
@@ -50,17 +69,17 @@ class DB {
         return $r;
     }
 
-    function insert_and_return($query, $connection) {
+    function insert_and_return($query, $connection=null) {
         $c = $connection ?? $this->dbconn;
         $r = mysqli_query($c, $query);
     }
 
-    function update($query, $connection) {
+    function update($query, $connection=null) {
         $c = $connection ?? $this->dbconn;
         $r = mysqli_query($c, $query);
     }
 
-    function update_and_return($query, $connection) {
+    function update_and_return($query, $connection=null) {
         $c = $connection ?? $this->dbconn;
         $r = mysqli_query($c, $query);
     }

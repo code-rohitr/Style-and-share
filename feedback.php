@@ -1,7 +1,11 @@
 <?php
 include('lib/methods/auth.php');
 
-$a = Auth::isAuthenticated();
+try {
+    $auth = Auth::isAuthenticated();
+} catch (Exception $e) {
+    echo $e;
+}
 
 if ($a) {
 	?>
