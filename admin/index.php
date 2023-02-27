@@ -16,6 +16,7 @@ include(__DIR__.'/../lib/partials/head.php');
 include(__DIR__.'/../lib/partials/footer.php');
 ?>
 <h1>Welcome Admin</h1>
+<a href="?logout=1" target="">Log out</a>
 <?php
 } else {
     Auth::redirectToLogin('./login.php');

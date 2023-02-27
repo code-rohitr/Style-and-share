@@ -80,10 +80,13 @@ class Auth {
 
             $create_query = "INSERT INTO `admin` (`name`, `email`, `password`) VALUES ('$name', '$email', '$hashed')";
 
-            $created = $db->insert($create_query);
+            $insertData['table'] = 'admin';
+            $insertData['id'] = 'aid';
 
-            if ($created) {
-                return $this->authenticate($r);
+            $user = $db->insert_and_return($create_query, $insertData);
+
+            if ($user) {
+                return $this->authenticate($user);
             } else {
                 throw new Exception('An unknown error occurred.');
             }
@@ -93,17 +96,61 @@ class Auth {
     }
 
     public function loginUser($data) {
-        $pass = $data->password;
-        $email = $data->email;
+        $db = $this->db;
+
+        $pass = $db->clean_str($data['password']);
+        $email = $db->clean_str($data['email']);
+
+
+        $q = "SELECT * FROM `users` WHERE `email`='$email'";
+
+        $r = $db->select($q);
+
+        if ($r) {
+            if ($this->isCorrectPassword($pass, $r['password'])) {
+                return $this->authenticate($r);
+            } else {
+                throw new Exception('Wrong credentials.');
+            }
+        } else {
+            throw new Exception('No user with the given email.');
+        }
     }
 
     public function signupUser($data) {
-        $pass = $data->password;
-        $email = $data->email;
-        $contact = $data->contact;
-        $name = $data->name;
-        $username = $data->username;
+        
+        $db = $this->db;
+        
+        
+        $name = $db->clean_str($data['name']);
+        $pass = $db->clean_str($data['password']);
+        $email = $db->clean_str($data['email']);
+        $contact = $db->clean_str($data['contact']);
+        $username = $db->clean_str($data['username']);
 
+
+        $q = "SELECT * FROM `users` WHERE `email`='$email'";
+
+        $r = $db->select($q);
+
+        if (!$r) {
+            $hashed = $this->hashPassword($pass);
+
+            $create_query = "INSERT INTO `users` (`name`, `email`, `password`, `username`, `contact`) VALUES ('$name', '$email', '$hashed', '$username', $contact)";
+
+            $insertData['table'] = 'users';
+            $insertData['id'] = 'uid';
+
+            $user = $db->insert_and_return($create_query, $insertData);
+
+            if ($user) {
+                return $this->authenticate($user);
+            } else {
+                throw new Exception('An unknown error occurred.');
+            }
+        } else {
+            throw new Exception('User already exists with this email.');
+        }
     }
 
     public static function logout() {

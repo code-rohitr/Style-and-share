@@ -1,5 +1,33 @@
 <?php
+include('lib/methods/auth.php');
+
 include('lib/partials/head.php');
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  $name = $_POST['name'];
+  $email = $_POST['email'];
+  $password = $_POST['password'];
+  $username = $_POST['username'];
+  $contact = $_POST['contact'];
+
+  $auth = new Auth();
+
+  $data['email'] = $email;
+  $data['name'] = $name;
+  $data['password'] = $password;
+  $data['contact'] = $contact;
+  $data['username'] = $username;
+
+  try {
+      $logged = $auth->signupUser($data);
+
+      if ($logged) {
+          Auth::redirectToLogin('./index.php');
+      }
+  } catch (Exception $e) {
+      echo $e;
+  }
+}
 ?>
 
 <div class='bold-line'></div>

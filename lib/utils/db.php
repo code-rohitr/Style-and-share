@@ -53,14 +53,6 @@ class DB {
         return $r->fetch_assoc();
     }
 
-    // public function select_one($query, $connection) {
-    //     $c = $connection ?? $this->dbconn;
-
-    //     $r = mysqli_query($c, $query);
-
-    //     return $r->fetch();
-    // }
-
     public function insert($query, $connection=null) {
         $c = $connection ?? $this->dbconn;
 
@@ -69,9 +61,22 @@ class DB {
         return $r;
     }
 
-    function insert_and_return($query, $connection=null) {
+    public function insert_and_return($query, $data, $connection=null) {
         $c = $connection ?? $this->dbconn;
-        $r = mysqli_query($c, $query);
+
+        $r = $this->insert($query, $c);
+
+        if ($r) {
+            $table = $data['table'];
+            $table_id = $data['id'];
+
+            $id = mysqli_insert_id($c);
+
+            return $this->select("SELECT * FROM `$table` WHERE `$table_id`='$id'");
+            
+        } else {
+            throw new Exception(mysqli_error($c));
+        }
     }
 
     function update($query, $connection=null) {

@@ -1,5 +1,28 @@
 <?php
+include('lib/methods/auth.php');
+
 include('lib/partials/head.php');
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    $auth = new Auth();
+
+    $data['email'] = $email;
+
+    $data['password'] = $password;
+
+    try {
+        $logged = $auth->loginUser($data);
+
+        if ($logged) {
+            Auth::redirectToLogin('./index.php');
+        }
+    } catch (Exception $e) {
+        echo $e;
+    }
+}
 ?>
     <div class='bold-line'></div>
     <div class='container'>
@@ -13,7 +36,9 @@ include('lib/partials/head.php');
                     <input type='password' placeholder='Password' class='input-line full-width' name="password" id="password" />
                 </div>
                 <!-- <div class='spacing'>or continue with <span class='highlight'>Facebook</span></div> -->
-                <div><input class='ghost-round full-width' type="submit" value="Login" id="submit" /></div>
+                <div>
+                    <button class='ghost-round full-width' type="submit" id="submit">Login</button>
+                </div>
             </form>
         </div>
     </div>
