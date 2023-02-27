@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,100,500);
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,300,100,500");
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Sacramento&display=swap");
 
 /* font-family: 'Poppins', sans-serif;
@@ -136,9 +136,9 @@ a {
 .ghost-round {
   cursor: pointer;
   background: none;
-  border: 1px solid black;
+  border: 1px solid rgba(255, 255, 255, 0.65);
   border-radius: 25px;
-  color: black;
+  color: rgba(255, 255, 255, 0.65);
   -webkit-align-self: flex-end;
   -ms-flex-item-align: end;
   align-self: flex-end;
@@ -156,7 +156,7 @@ a {
 
 .ghost-round:hover {
   background: white;
-  color: black;
+  color: #bfa1d9;
   -webkit-transition: all 0.2s ease;
   transition: all 0.2s ease;
 }
@@ -165,16 +165,16 @@ a {
   background: none;
   margin-bottom: 10px;
   line-height: 2.4em;
+  color: #fff;
   font-family: roboto;
   font-weight: 300;
   letter-spacing: 0px;
   letter-spacing: 0.02rem;
   font-size: 19px;
   font-size: 1.2rem;
-  border-bottom: 1px solid rgba(128, 128, 128, 0.65);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.65);
   -webkit-transition: all 0.2s ease;
   transition: all 0.2s ease;
-  color: black;
 }
 
 .full-width {
@@ -214,7 +214,6 @@ a {
   flex-flow: column;
   z-index: 5;
   height: auto;
-  color: black;
 }
 
 .welcome {
@@ -226,10 +225,6 @@ a {
   letter-spacing: 0px;
   letter-spacing: 0.05rem;
   /* border: 2px solid red; */
-}
-
-input::placeholder{
-    color: rgb(94, 94, 94);
 }
 
 .subtitle {
@@ -261,24 +256,25 @@ input::placeholder{
   flex-flow: column;
   box-shadow: 0px 15px 50px 10px rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
-  height: 560px;
+  height: auto;
   width: 360px;
   background: #fff;
   background: url("https://pexels.imgix.net/photos/27718/pexels-photo-27718.jpg?fit=crop&w=1280&h=823")
     top left no-repeat;
+    /* border: 2px solid red; */
     border-radius: 11px;
 }
 
 .overlay {
-  /* background: -webkit-linear-gradient(#8ca6db, #b993d6); */
-  /* background: linear-gradient(#8ca6db, #b993d6); */
+  background: -webkit-linear-gradient(#8ca6db, #b993d6);
+  background: linear-gradient(#8ca6db, #b993d6);
   opacity: 0.85;
   filter: alpha(opacity=85);
-  height: 560px;
+  height: 100%;
   position: absolute;
   width: 360px;
   z-index: 1;
-  border-radius: 11px;
+    border-radius: 11px;
 }
 
 .bold-line {
