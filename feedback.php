@@ -35,19 +35,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <?php
 include('lib/partials/head.php');
 ?>
-	<div class='bold-line'></div>
-	<div class='container'>
-		<div class='window'>
-			<div class='overlay'></div>
-			<form class='content' method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" enctype="multipart/form-data">
-				<div class='welcome'>Feedback</div>
-				<div class='subtitle'>We would love to hear your feedback</div>
-				<div class='input-fields'>
-					<textarea type='text' placeholder='Your feedback' class='input-line full-width' name="feedback" id="feedback"></textarea>
-				</div>
-                <button type="submit" style="border: 1px solid black;padding: 1rem;cursor: pointer;">Submit</button>
-			</form>
-		</div>
+	<div class="feedback-main-container">
+		<h1>Customer Feedback</h1>
+		<p>Facing any issues? Let us know</p>
+		<form class='form-container' method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" enctype="multipart/form-data">
+			<textarea name="feedback" id="feedback" cols="30" rows="10" placeholder="Start typing here..."></textarea>
+			<button class="submit-btn btn-common" type="submit">Send</button>
+		</form>
 	</div>
 <?php
 include('lib/partials/footer.php');

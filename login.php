@@ -24,21 +24,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 ?>
-    <div class='bold-line'></div>
-    <div class='container'>
-        <div class='window'>
-            <div class='overlay'></div>
-            <form class='content' method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-                <div class='welcome'>Welcome Back!</div>
-                <div class='subtitle'>Login into your already existing account.</div>
-                <div class='input-fields'>
-                    <input type='email' placeholder='Email' class='input-line full-width' name="email" id="email" />
-                    <input type='password' placeholder='Password' class='input-line full-width' name="password" id="password" />
-                </div>
-                <!-- <div class='spacing'>or continue with <span class='highlight'>Facebook</span></div> -->
-                <div>
-                    <button class='ghost-round full-width' type="submit" id="submit">Login</button>
-                </div>
+    <div class="login-main-container">
+        <div class="login-container">
+            <h1>Welcome Back</h1>
+            <p>Sign in to your already existing account</p>
+            <form class='login-form' method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+                <input type="text" placeholder="Email" name="email" id="email" />
+                <input type="password" placeholder="Password" name="password" id="password" />
+                <button class="login-btn" type="submit" id="submit">Login</button>
             </form>
         </div>
     </div>

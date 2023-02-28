@@ -29,27 +29,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   }
 }
 ?>
-
-<div class='bold-line'></div>
-<div class='container'>
-  <div class='window'>
-    <div class='overlay'></div>
-    <form class='content' method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-      <div class='welcome'>Hello There!</div>
-      <div class='subtitle'>Register here and get started.</div>
-      <div class='input-fields'>
-        <input type='text' placeholder='Name' class='input-line full-width' name="name" id="name" />
-        <input type='text' placeholder='Username' class='input-line full-width' name="username" id="username" />
-        <input type='email' placeholder='Email' class='input-line full-width' name="email" id="email" />
-        <input type='password' placeholder='Password' class='input-line full-width' name="password"
-          id="password" />
-        <input type='text' placeholder='Contact Number' class='input-line full-width' name="contact"
-          id="contact" />
-
-      </div>
-      <!-- <div class='spacing'>or continue with <span class='highlight'>Facebook</span></div> -->
-      <div><input class='ghost-round full-width' type="submit" value="Register" /></div>
+<div class="register-main-container">
+  <div class="register-container">
+    <h1>Hello There</h1>
+    <p>Register here and get started</p>
+    <form class='register-form' method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+      <input type="text" placeholder="Name" name="name" id="name" />
+      <input type="text" placeholder="Username" name="username" id="username" />
+      <input type="email" placeholder="Email" name="email" id="email" />
+      <input type="password" placeholder="Password" name="password" id="password"/>
+      <input type="password" placeholder="Confirm Password" id="confirmPassword" />
+      <input type="text" placeholder="Contact Number" name="contact" id="contact" />
     </form>
+    <button class="register-btn">Login</button>
   </div>
 </div>
 <?php
