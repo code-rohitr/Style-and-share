@@ -35,8 +35,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       enctype="multipart/form-data">
       <input type="email" id="email" name="email" placeholder="Email" />
       <input type="password" placeholder="Password" id="password" name="password" />
+      <button type="submit" class="admin-login-btn">Login</button>
     </form>
-    <button class="admin-login-btn">Login</button>
   </div>
 </div>
 

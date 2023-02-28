@@ -80,7 +80,7 @@ include('lib/partials/head.php');
 						<input type="text" placeholder="Size" name="size" id="size" />
 						<input type='text' placeholder='Price' name="price" id="price" />
 						<input type="text" placeholder="Brand" name="brand" id="brand" />
-						<input type="text" placeholder="Brand" name="brand" id="brand" />
+						<input type="text" placeholder="Fabric Material" name="fmaterial" id="fmaterial" />
 						<p>Upload an image of the product</p>
 						<input style="display: none;" type="file" id="uploadImg" name="uploadImg" />
 						<button class="upload-btn" type="button" onclick="acceptFile()">Upload</button>

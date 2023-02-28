@@ -40,8 +40,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       <input type="password" placeholder="Password" name="password" id="password"/>
       <input type="password" placeholder="Confirm Password" id="confirmPassword" />
       <input type="text" placeholder="Contact Number" name="contact" id="contact" />
+      <button class="register-btn" type="submit">Login</button>
     </form>
-    <button class="register-btn">Login</button>
   </div>
 </div>
 <?php
