@@ -1,6 +1,6 @@
 <?php
 
-include(__DIR__.'/../utils/db.php');
+include_once(__DIR__.'/../utils/db.php');
 
 session_start();
 // $_SESSION['user'] = 10;

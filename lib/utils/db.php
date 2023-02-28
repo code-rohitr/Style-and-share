@@ -58,6 +58,11 @@ class DB {
 
         $r = mysqli_query($c, $query);
 
+        $e = mysqli_error($c);
+
+        if ($e) {
+            throw new Exception($e);
+        }
         return $r;
     }
 
