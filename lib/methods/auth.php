@@ -3,7 +3,6 @@
 include_once(__DIR__.'/../utils/db.php');
 
 session_start();
-// $_SESSION['user'] = 10;
 class Auth {
     private $db;
 
@@ -50,7 +49,7 @@ class Auth {
 
         $q = "SELECT * FROM `admin` WHERE `email`='$email'";
 
-        $r = $db->select($q);
+        $r = $db->select_one($q);
 
         if ($r) {
             if ($this->isCorrectPassword($pass, $r['password'])) {
@@ -73,7 +72,7 @@ class Auth {
 
         $q = "SELECT * FROM `admin` WHERE `email`='$email'";
 
-        $r = $db->select($q);
+        $r = $db->select_one($q);
 
         if (!$r) {
             $hashed = $this->hashPassword($pass);
@@ -104,7 +103,7 @@ class Auth {
 
         $q = "SELECT * FROM `users` WHERE `email`='$email'";
 
-        $r = $db->select($q);
+        $r = $db->select_one($q);
 
         if ($r) {
             if ($this->isCorrectPassword($pass, $r['password'])) {
@@ -131,7 +130,7 @@ class Auth {
 
         $q = "SELECT * FROM `users` WHERE `email`='$email'";
 
-        $r = $db->select($q);
+        $r = $db->select_one($q);
 
         if (!$r) {
             $hashed = $this->hashPassword($pass);

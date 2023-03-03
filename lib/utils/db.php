@@ -39,7 +39,7 @@ class DB {
         return mysqli_escape_string($c ,$string);
     }
 
-    public function select($query, $connection=null) {
+    public function select_one($query, $connection=null) {
         $c = $connection ?? $this->dbconn;
 
         $r = mysqli_query($c, $query);
@@ -51,6 +51,20 @@ class DB {
         }
 
         return $r->fetch_assoc();
+    }
+
+    public function select_all($query, $connection=null) {
+        $c = $connection ?? $this->dbconn;
+
+        $r = mysqli_query($c, $query);
+
+        $e = mysqli_error($c);
+
+        if ($e) {
+            throw new Exception($e);
+        }
+
+        return $r->fetch_all(MYSQLI_ASSOC);
     }
 
     public function insert($query, $connection=null) {
@@ -77,7 +91,7 @@ class DB {
 
             $id = mysqli_insert_id($c);
 
-            return $this->select("SELECT * FROM `$table` WHERE `$table_id`='$id'");
+            return $this->select_one("SELECT * FROM `$table` WHERE `$table_id`='$id'");
             
         } else {
             throw new Exception(mysqli_error($c));

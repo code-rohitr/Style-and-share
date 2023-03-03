@@ -1,5 +1,5 @@
 <?php
-include_once(__DIR__.'/../utils/db.php');
+
 include_once('auth.php');
 
 class UserMethods {

@@ -31,7 +31,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <form class='login-form' method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                 <input type="text" placeholder="Email" name="email" id="email" />
                 <input type="password" placeholder="Password" name="password" id="password" />
-                <button class="login-btn" type="submit" id="submit">Login</button>
+                <button class="login-btn" type="submit" id="submit">
+                    Log in
+                </button>
             </form>
         </div>
     </div>
