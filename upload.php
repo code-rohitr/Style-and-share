@@ -31,33 +31,34 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		echo $e;
 	}
 	
-	$name = $_POST['name'];
-	$size = $_POST['size'];
-	$price = $_POST['price'];
-	$description = $_POST['description'];
-	$brand = $_POST['brand'];
-	$color = $_POST['color'];
-	$category = 'accessory';
-	$fmaterial = 'Cotton';
-	$owner = Auth::currentUser();
-
-	$query = "INSERT INTO 
-	`items` (`owner`, `name`, `category`, `description`, `size`, `price`, `img`,`fmaterial`, `color`, `brand`) 
-	VALUES 
-	($owner, '$name', '$category', '$description', '$size', '$price', '$imgurl', '$fmaterial', '$color', '$brand')";
-
-	try {
-		$added = $db->insert($query);
-
-		if ($added) {
-			echo "done";
+	if ($imgurl) {
+		$name = $_POST['name'];
+		$size = $_POST['size'];
+		$price = $_POST['price'];
+		$description = $_POST['description'];
+		$brand = $_POST['brand'];
+		$color = $_POST['color'];
+		$fmaterial = $_POST['fmaterial'];
+		$owner = Auth::currentUser();
+	
+		$query = "INSERT INTO 
+		`items` (`owner`, `name`, `description`, `size`, `price`, `img`,`fmaterial`, `color`, `brand`, `isForRent`, `isForSale`) 
+		VALUES 
+		($owner, '$name', '$description', '$size', '$price', '$imgurl', '$fmaterial', '$color', '$brand', 0, 1)";
+	
+		try {
+			$added = $db->insert($query);
+	
+			if ($added) {
+				echo "done";
+			}
+	
+		} catch (Exception $e) {
+			if (file_exists($imgurl)) {
+				unlink($imgurl);
+			}
+			echo $e;
 		}
-
-	} catch (Exception $e) {
-		if (file_exists($imgurl)) {
-			unlink($imgurl);
-		}
-		echo $e;
 	}
 }
 
