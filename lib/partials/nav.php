@@ -5,19 +5,16 @@
 
     <div class="nav-right">
         <ul>
-            <a href="#">
+            <a href="./index.php">
                 <li>Home</li>
             </a>
-            <a href="#">
+            <a href="./products.php">
                 <li>Buy</li>
             </a>
-            <a href="#">
-                <li>Rent</li>
-            </a>
-            <a href="#">
+            <a href="./upload.php">
                 <li>Sell</li>
             </a>
-            <a href="#">
+            <a href="./cart.php">
                 <li>Cart</li>
             </a>
             <?php
