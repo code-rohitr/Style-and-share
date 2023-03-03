@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Feb 25, 2023 at 06:26 AM
+-- Generation Time: Mar 03, 2023 at 11:20 AM
 -- Server version: 5.7.26
 -- PHP Version: 7.4.2
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `style_n_share`
 --
+CREATE DATABASE IF NOT EXISTS `style_n_share` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `style_n_share`;
 
 -- --------------------------------------------------------
 
@@ -26,6 +28,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `admin`
 --
 
+DROP TABLE IF EXISTS `admin`;
 CREATE TABLE `admin` (
   `aid` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
@@ -33,12 +36,18 @@ CREATE TABLE `admin` (
   `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `admin`
+-- Table structure for table `cart`
 --
 
-INSERT INTO `admin` (`aid`, `name`, `email`, `password`) VALUES
-(2, 'Admin', 'admin@admin.com', 'db69fc039dcbd2962cb4d28f5891aae1');
+DROP TABLE IF EXISTS `cart`;
+CREATE TABLE `cart` (
+  `id` int(11) NOT NULL,
+  `uid` int(11) NOT NULL,
+  `item_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -46,19 +55,12 @@ INSERT INTO `admin` (`aid`, `name`, `email`, `password`) VALUES
 -- Table structure for table `feedback`
 --
 
+DROP TABLE IF EXISTS `feedback`;
 CREATE TABLE `feedback` (
   `fid` int(11) NOT NULL,
   `uid` int(11) NOT NULL,
   `content` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `feedback`
---
-
-INSERT INTO `feedback` (`fid`, `uid`, `content`) VALUES
-(1, 1, 'hello'),
-(5, 1, 'hellof');
 
 -- --------------------------------------------------------
 
@@ -66,32 +68,20 @@ INSERT INTO `feedback` (`fid`, `uid`, `content`) VALUES
 -- Table structure for table `items`
 --
 
+DROP TABLE IF EXISTS `items`;
 CREATE TABLE `items` (
   `item_id` int(11) NOT NULL,
   `owner` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `category` varchar(255) NOT NULL,
   `description` varchar(255) NOT NULL,
   `size` varchar(255) NOT NULL,
   `img` varchar(255) NOT NULL,
   `price` int(11) NOT NULL,
   `fmaterial` varchar(255) NOT NULL,
   `color` varchar(255) NOT NULL,
-  `brand` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `orders`
---
-
-CREATE TABLE `orders` (
-  `oid` int(11) NOT NULL,
-  `item_id` int(11) NOT NULL,
-  `u_id` int(11) NOT NULL,
-  `status` varchar(255) NOT NULL,
-  `time` varchar(255) NOT NULL
+  `brand` varchar(255) NOT NULL,
+  `isForRent` tinyint(1) NOT NULL,
+  `isForSale` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -100,12 +90,39 @@ CREATE TABLE `orders` (
 -- Table structure for table `payment`
 --
 
+DROP TABLE IF EXISTS `payment`;
 CREATE TABLE `payment` (
   `pid` int(11) NOT NULL,
   `uid` int(11) NOT NULL,
-  `item_id` int(11) NOT NULL,
   `amount` int(11) NOT NULL,
   `mode` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `purchasedItems`
+--
+
+DROP TABLE IF EXISTS `purchasedItems`;
+CREATE TABLE `purchasedItems` (
+  `id` int(11) NOT NULL,
+  `item_id` int(11) NOT NULL,
+  `purchased_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `purchases`
+--
+
+DROP TABLE IF EXISTS `purchases`;
+CREATE TABLE `purchases` (
+  `id` int(11) NOT NULL,
+  `pid` int(11) NOT NULL,
+  `uid` int(11) NOT NULL,
+  `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -114,6 +131,7 @@ CREATE TABLE `payment` (
 -- Table structure for table `review`
 --
 
+DROP TABLE IF EXISTS `review`;
 CREATE TABLE `review` (
   `rid` int(11) NOT NULL,
   `item_id` int(11) NOT NULL,
@@ -127,6 +145,7 @@ CREATE TABLE `review` (
 -- Table structure for table `users`
 --
 
+DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `uid` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
@@ -137,13 +156,6 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`uid`, `name`, `email`, `password`, `username`, `contact`) VALUES
-(1, 'Yuv', 'some@yuv.com', '123456', 'yuv', 987654321);
-
---
 -- Indexes for dumped tables
 --
 
@@ -152,6 +164,14 @@ INSERT INTO `users` (`uid`, `name`, `email`, `password`, `username`, `contact`) 
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`aid`);
+
+--
+-- Indexes for table `cart`
+--
+ALTER TABLE `cart`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `uid` (`uid`,`item_id`),
+  ADD KEY `item_id` (`item_id`);
 
 --
 -- Indexes for table `feedback`
@@ -168,19 +188,26 @@ ALTER TABLE `items`
   ADD KEY `owner` (`owner`);
 
 --
--- Indexes for table `orders`
---
-ALTER TABLE `orders`
-  ADD PRIMARY KEY (`oid`),
-  ADD KEY `item_id` (`item_id`),
-  ADD KEY `u_id` (`u_id`);
-
---
 -- Indexes for table `payment`
 --
 ALTER TABLE `payment`
   ADD PRIMARY KEY (`pid`),
+  ADD KEY `uid` (`uid`);
+
+--
+-- Indexes for table `purchasedItems`
+--
+ALTER TABLE `purchasedItems`
+  ADD PRIMARY KEY (`id`),
   ADD KEY `item_id` (`item_id`),
+  ADD KEY `purchased_id` (`purchased_id`);
+
+--
+-- Indexes for table `purchases`
+--
+ALTER TABLE `purchases`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `pid` (`pid`),
   ADD KEY `uid` (`uid`);
 
 --
@@ -206,13 +233,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `aid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `aid` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `cart`
+--
+ALTER TABLE `cart`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `feedback`
 --
 ALTER TABLE `feedback`
-  MODIFY `fid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `fid` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `items`
@@ -221,16 +254,22 @@ ALTER TABLE `items`
   MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `orders`
---
-ALTER TABLE `orders`
-  MODIFY `oid` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
   MODIFY `pid` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `purchasedItems`
+--
+ALTER TABLE `purchasedItems`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `purchases`
+--
+ALTER TABLE `purchases`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `review`
@@ -242,11 +281,18 @@ ALTER TABLE `review`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `cart`
+--
+ALTER TABLE `cart`
+  ADD CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`item_id`) REFERENCES `items` (`item_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `cart_ibfk_2` FOREIGN KEY (`uid`) REFERENCES `users` (`uid`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `feedback`
@@ -261,18 +307,24 @@ ALTER TABLE `items`
   ADD CONSTRAINT `items_ibfk_1` FOREIGN KEY (`owner`) REFERENCES `users` (`uid`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `orders`
---
-ALTER TABLE `orders`
-  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`item_id`) REFERENCES `items` (`item_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`u_id`) REFERENCES `users` (`uid`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Constraints for table `payment`
 --
 ALTER TABLE `payment`
-  ADD CONSTRAINT `payment_ibfk_1` FOREIGN KEY (`item_id`) REFERENCES `items` (`item_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `payment_ibfk_2` FOREIGN KEY (`uid`) REFERENCES `users` (`uid`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `purchasedItems`
+--
+ALTER TABLE `purchasedItems`
+  ADD CONSTRAINT `purchaseditems_ibfk_1` FOREIGN KEY (`item_id`) REFERENCES `items` (`item_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `purchaseditems_ibfk_2` FOREIGN KEY (`purchased_id`) REFERENCES `purchases` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `purchases`
+--
+ALTER TABLE `purchases`
+  ADD CONSTRAINT `purchases_ibfk_1` FOREIGN KEY (`pid`) REFERENCES `payment` (`pid`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `purchases_ibfk_2` FOREIGN KEY (`uid`) REFERENCES `users` (`uid`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `review`
