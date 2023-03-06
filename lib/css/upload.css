@@ -8,7 +8,7 @@
 
 .upload-main-container{
   /* border: 2px solid red; */
-  height: 90vh;
+  height: 120vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -54,6 +54,15 @@
 }
 
 .upload-btn{
+  width: 100%;
+  height: 40px;
+  background: none;
+  border-radius: 5px;
+  border: 2px solid #7F54DA;
+  cursor: pointer;
+}
+
+.upload-submit-btn{
   margin-top: 20px;
   width: 100%;
   height: 40px;

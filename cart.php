@@ -27,27 +27,27 @@ try {
         <?php
         foreach ($data as $item) {
         ?>
-        <div class="card">
-            <div class="img-container">
+        <div class="cart-card">
+            <div class="cart-img-container">
                 <img src="<?php echo $item['img']; ?>" alt="" />
             </div>
 
-            <div class="card-content-container">
-                <div class="content-left">
-                    <div class="title-desc-container">
-                        <h2 class="item-title"><?php echo $item['name']; ?></h2>
-                        <p class="item-desc"><?php echo $item['description']; ?></p>
+            <div class="cart-card-content-container">
+                <div class="cart-content-left">
+                    <div class="cart-title-desc-container">
+                        <h2 class="cart-item-title"><?php echo $item['name']; ?></h2>
+                        <p class="cart-item-desc"><?php echo $item['description']; ?></p>
                     </div>
-                    <div class="general-info">
-                        <p>Size: <span class="size"><?php echo $item['size']; ?></span></p>
-                        <p>rating: <span class="size">4.5</span></p>
-                        <p>Color: <span class="size"><?php echo $item['color']; ?></span></p>
+                    <div class="cart-general-info">
+                        <p>Size: <span class="cart-size"><?php echo $item['size']; ?></span></p>
+                        <p>rating: <span class="cart-size">4.5</span></p>
+                        <p>Color: <span class="cart-size"><?php echo $item['color']; ?></span></p>
                     </div>
                 </div>
 
-                <div class="content-right">
-                    <p>Rs. <span class="price"><?php echo $item['price']; ?></span></p>
-                    <button class="remove-btn">Remove</button>
+                <div class="cart-content-right">
+                    <p>Rs. <span class="cart-price"><?php echo $item['price']; ?></span></p>
+                    <button class="cart-remove-btn">Remove</button>
                 </div>
             </div>
         </div>
@@ -57,7 +57,7 @@ try {
 
     </div>
 
-    <div class="cart-btn-container">
+    <div class="cart-cart-btn-container">
         <a href="#"><button class="btn-common">Shop More</button></a>
         <a href="#"><button class="btn-common">Checkout</button></a>
     </div>

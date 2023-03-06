@@ -32,13 +32,12 @@ class UserMethods {
         } else {
             throw new Exception('Error while saving the file.');
         }
-
     }
 
     public function handleImageUpload($file, $allowed_size=null, $repo='') {
         $types = array('jpg', 'jpeg', 'png', 'svg');
 
-        $size = $allowed_size ?? 500000;
+        $size = $allowed_size ?? 2000000;
 
         return $this->handleFileUpload($file, $types, $size, $repo);
     }

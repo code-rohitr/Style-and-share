@@ -84,8 +84,8 @@ include('lib/partials/head.php');
 						<input type="text" placeholder="Fabric Material" name="fmaterial" id="fmaterial" />
 						<p>Upload an image of the product</p>
 						<input style="display: none;" type="file" id="uploadImg" name="uploadImg" />
-						<button class="upload-btn" type="button" onclick="acceptFile()">Upload</button>
-						<button type="submit">Submit</button>
+						<button class="upload-btn" type="button" onclick="acceptFile()">Upload Photo</button>
+						<button type="submit" class="upload-submit-btn">Submit</button>
 					</form>
 				</div>
 			</div>

@@ -4,7 +4,12 @@
     padding: 0px;
 }
 
-.search-container{
+a{
+    text-decoration: none;
+    color: inherit;
+}
+
+.product-search-container{
     margin: 60px auto;
     width: 40%;
     height: 50px;
@@ -17,7 +22,7 @@
     overflow: hidden;
 }
 
-.search-container input{
+.product-search-container input{
     width: 100%;
     height: 100%;
     border: none;
@@ -27,7 +32,7 @@
 }
 
 
-.btn-common{
+.product-search-btn{
     height: 40px;
     padding: 0px 20px;
     border: 2px solid #7F54DA;
@@ -36,6 +41,7 @@
     border-radius: 5px;
     cursor: pointer;
     font-size: 1rem;
+    margin: 0px;
 }
 
 
@@ -67,7 +73,7 @@
 }
 
 
-.cards-main-container{
+.product-cards-main-container{
     /* border: 2px solid red; */
     width: 80%;
     margin: 20px auto;
@@ -75,17 +81,15 @@
     display: flex;
     align-items: center;
     justify-content: left;
-    justify-content: space-between;
     flex-wrap: wrap;
 }
 
-.card{
+.product-card{
     height: auto;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    /* border: 2px solid black; */
     width: 250px;
     margin: 10px 20px;
     /* padding: 10px; */
@@ -94,18 +98,20 @@
     transition: 100ms box-shadow ease-in-out;
 }
 
-.card:hover{
+.product-card:hover{
     box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.25);
 }
 
-.img-container{
+.product-img-container{
     width: 100%;
     height: 200px;
     overflow: hidden;
     border-radius: 11px 11px 0 0;
+    border-bottom: 1px solid rgb(163, 163, 163);
+
 }
 
-.card-img{
+.product-card-img{
     object-fit: cover;
     object-position: center;
     width: 100%;
@@ -114,6 +120,7 @@
 
 .product-info {
     padding: 10px 10px;
+    width: 100%;
 }
 
 .product-info h2{
@@ -127,7 +134,7 @@
     font-weight: 300;
 }
 
-.info-bar{
+.product-info-bar{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -135,15 +142,13 @@
     margin-top: 10px;
 }
 
-.info-bar h2{
+.product-info-bar h2{
     font-size: 0.9rem;
     color: #666666;
     font-weight: 400;
 }
 
-.add-btn{
-    width: 100%;
-    height: 30px;
+.products-add-btn{
     margin-top: 10px;
     background: none;
     border: 2px solid #7F54DA;
@@ -151,9 +156,11 @@
     color: #7F54DA;
     transition: 100ms all ease-in-out;
     cursor: pointer;
+    width: 100%;
+    height: 40px;
 }
 
-.add-btn:hover{
+.products-add-btn:hover{
     background-color: #7F54DA;
     color: white;
 }

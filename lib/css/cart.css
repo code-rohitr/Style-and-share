@@ -34,7 +34,7 @@
     flex-direction: column;
 }
 
-.card{
+.cart-card{
     width: 100%;
     height: 200px;
     display: flex;
@@ -48,12 +48,12 @@
     margin: 10px auto;
 }
 
-.img-container{
+.cart-img-container{
     height: 100%;
     width: 250px;
 }
 
-.img-container img{
+.cart-img-container img{
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -61,7 +61,7 @@
     border-radius: 5px;
 }
 
-.card-content-container{
+.cart-card-content-container{
     width: 100%;
     display: flex;
     align-items: center;
@@ -71,7 +71,7 @@
     height: 100%;
 }
 
-.content-left{
+.cart-content-left{
     height: 100%;
     width: 90%;
     display: flex;
@@ -81,29 +81,29 @@
     flex-direction: column;
 }
 
-.general-info{
+.cart-general-info{
     display: flex;
     align-items: flex-start;
     justify-content: center;
     justify-content: space-between;
 }
 
-.general-info > p{
+.cart-general-info > p{
     margin-right: 60px;
     color: #666666;
     font-size: 14px;
 }
 
-.title-desc-container > h2{
+.cart-title-desc-container > h2{
     font-size: 20px;
 }
 
-.title-desc-container > p{
+.cart-title-desc-container > p{
     color: #666666;
     font-size: 14px;
 }
 
-.content-right{
+.cart-content-right{
     height: 100%;
     display: flex;
     align-items: flex-start;
@@ -112,24 +112,24 @@
     flex-direction: column;
 }
 
-.remove-btn{
+.cart-remove-btn{
     border: none;
     background: none;
     text-decoration: underline;
     cursor: pointer;
 }
 
-.remove-btn:hover{
+.cart-remove-btn:hover{
     text-decoration: none;
 }
 
-.cart-btn-container{
+.cart-cart-btn-container{
     margin-top: 10px;
     width: 100%;
     text-align: right;
 }
 
-.btn-common{
+.cart-btn-common{
     height: 40px;
     padding: 0px 20px;
     border: 2px solid #7F54DA;
@@ -141,7 +141,7 @@
     transition: 100ms all ease-in-out;
 }
 
-.btn-common:hover{
+.cart-btn-common:hover{
     color: #7F54DA;
     background: none;
     border: 2px solid #7F54DA;
