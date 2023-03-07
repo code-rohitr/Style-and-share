@@ -42,9 +42,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$owner = Auth::currentUser();
 	
 		$query = "INSERT INTO 
-		`items` (`owner`, `name`, `description`, `size`, `price`, `img`,`fmaterial`, `color`, `brand`, `isForRent`, `isForSale`) 
+		`items` (`owner`, `name`, `description`, `size`, `price`, `img`,`fmaterial`, `color`, `brand`) 
 		VALUES 
-		($owner, '$name', '$description', '$size', '$price', '$imgurl', '$fmaterial', '$color', '$brand', 0, 1)";
+		($owner, '$name', '$description', '$size', '$price', '$imgurl', '$fmaterial', '$color', '$brand')";
 	
 		try {
 			$added = $db->insert($query);
