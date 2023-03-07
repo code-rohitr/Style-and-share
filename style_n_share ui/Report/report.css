@@ -1,0 +1,51 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+.report-outer-container{
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    flex-direction: column;
+    margin-top: 10vh;
+    font-family: poppins;
+}
+
+.report-main-container{
+    width: 70%;
+    margin: 0px auto;
+
+}
+
+.report-main-container h2{
+    font-size: 2rem;
+}
+
+.report-cards-container{
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.report-card{
+    border: 2px solid #C5C5C5;
+    width: 100%;
+    border-radius: 5px;
+    padding: 10px 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-content: space-between;
+    margin: 20px auto;
+    height: 70px;
+}
+
+.report-card h4, p{
+    font-size: 1.2rem;
+    font-weight: 400;
+}
