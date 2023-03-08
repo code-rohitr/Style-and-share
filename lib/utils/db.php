@@ -14,6 +14,20 @@ class DB {
         $this->dbpassword = 'style_n_share';
     }
 
+    private function execute_only($query, $connection=null) {
+        $c = $connection ?? $this->dbconn;
+
+        $r = mysqli_query($c, $query);
+
+        $e = mysqli_error($c);
+
+        if ($e) {
+            throw new Exception($e);
+        }
+
+        return [$r, $c];
+    }
+
     public function connect() {
         $db = $this->dbname;
         $host = $this->dbhost;
@@ -40,43 +54,20 @@ class DB {
     }
 
     public function select_one($query, $connection=null) {
-        $c = $connection ?? $this->dbconn;
-
-        $r = mysqli_query($c, $query);
-
-        $e = mysqli_error($c);
-
-        if ($e) {
-            throw new Exception($e);
-        }
+        [$r] = $this->execute_only($query, $connection);
 
         return $r->fetch_assoc();
     }
 
     public function select_all($query, $connection=null) {
-        $c = $connection ?? $this->dbconn;
-
-        $r = mysqli_query($c, $query);
-
-        $e = mysqli_error($c);
-
-        if ($e) {
-            throw new Exception($e);
-        }
+        [$r] = $this->execute_only($query, $connection);
 
         return $r->fetch_all(MYSQLI_ASSOC);
     }
 
     public function insert($query, $connection=null) {
-        $c = $connection ?? $this->dbconn;
-
-        $r = mysqli_query($c, $query);
-
-        $e = mysqli_error($c);
-
-        if ($e) {
-            throw new Exception($e);
-        }
+        [$r] = $this->execute_only($query, $connection);
+        
         return $r;
     }
 
@@ -99,13 +90,19 @@ class DB {
     }
 
     function update($query, $connection=null) {
-        $c = $connection ?? $this->dbconn;
-        $r = mysqli_query($c, $query);
+        [$r] = $this->execute_only($query, $connection);
     }
 
     function update_and_return($query, $connection=null) {
-        $c = $connection ?? $this->dbconn;
-        $r = mysqli_query($c, $query);
+        [$r] = $this->execute_only($query, $connection);
+    }
+
+    function delete($query, $connection=null) {
+
+        [$r] = $this->execute_only($query, $connection);
+
+        return $r;
+        
     }
 
     function close() {

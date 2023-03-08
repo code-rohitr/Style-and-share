@@ -5,54 +5,40 @@ $a = Auth::isAuthenticated();
 
 if ($a) {
 ?>
-    <?php
-    include('lib/partials/head.php');
-    ?>
-    <?php
-    include('lib/methods/cart.php');
-    include_once('lib/utils/db.php');
+<?php
+include('lib/partials/head.php');
+?>
+<?php
+include_once('lib/utils/db.php');
 
-    $uid = Auth::currentUser();
-    $query = "SELECT * FROM `items` WHERE `owner`!=$uid";
+$uid = Auth::currentUser();
+$query = "SELECT * FROM `items` WHERE `owner`!=$uid";
 
-    switch ($_GET['price']) {
-        case 'asc':
-            $query .= ' ORDER BY price ASC';
-            break;
-        case 'desc':
-            $query .= ' ORDER BY price DESC';
-            break;
-        default:
-            break;
-    }
+switch ($_GET['price']) {
+    case 'asc':
+        $query .= ' ORDER BY price ASC';
+        break;
+    case 'desc':
+        $query .= ' ORDER BY price DESC';
+        break;
+    default:
+        break;
+}
 
-    if ($item_id = $_GET['addToCart']) {
-        try {
-            $cartMethods = new CartMethods();
-            $added = $cartMethods->add_to_cart($item_id);
+try {
+    $db = new DB();
+    $conn = $db->connect();
+} catch (Exception $e) {
+    echo $e;
+}
 
-            if ($added) {
-                Auth::redirectToLogin($_SERVER['PHP_SELF']);
-            }
-        } catch (Exception $e) {
-            echo $e;
-        }
-    }
+try {
+    $data = $db->select_all($query);
+} catch (Exception $e) {
 
-    try {
-        $db = new DB();
-        $conn = $db->connect();
-    } catch (Exception $e) {
-        echo $e;
-    }
-
-    try {
-        $data = $db->select_all($query);
-    } catch (Exception $e) {
-
-        echo $e;
-    }
-    ?>
+    echo $e;
+}
+?>
     <div class="product-search-container">
         <input type="text" placeholder="Ex. Shirts" />
         <button class="product-search-btn">Search</button>
@@ -83,7 +69,7 @@ if ($a) {
                         <h2 class="product-color"><?php echo $item['color']; ?></h2>
                         <h2 class="product-size">Size <span><?php echo $item['size']; ?></span></h2>
                     </div>
-                    <a href="?addToCart=<?php echo $item['item_id']; ?>"><button class="products-add-btn">Add To Cart</button></a>
+                    <a href="product.php?item=<?php echo $item['item_id']; ?>"><button class="products-add-btn">Add To Cart</button></a>
                 </div>
             </div>
         <?php
@@ -92,9 +78,9 @@ if ($a) {
 
 
     </div>
-    <?php
-    include('lib/partials/footer.php');
-    ?>
+<?php
+include('lib/partials/footer.php');
+?>
 <?php
 } else {
     Auth::redirectToLogin('./login.php');

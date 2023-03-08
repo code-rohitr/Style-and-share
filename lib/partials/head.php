@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
         <?php
         $libRoot = '.';
-        $filenames = array('register', 'upload', 'feedback', 'style', 'login', 'navbar', 'products', 'admin', 'products', 'cart');
+        $filenames = array('register', 'upload', 'feedback', 'style', 'login', 'navbar', 'products', 'admin', 'products', 'cart', 'payment', 'profile', 'rental_items', 'rental_upload', 'rentalDesc');
         if (in_array('admin', explode('/', $_SERVER["PHP_SELF"]))) {
             $libRoot = '..';
         }

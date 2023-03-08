@@ -37,11 +37,22 @@ class CartMethods {
         $db = $this->db;
         $uid = $this->user;
 
-        $item_id = mysqli_real_escape_string($db->getCurrentConnection(), $item_id);
+        $item_id = $db->clean_str($item_id);
 
         $query = "INSERT INTO `cart`(`uid`, `item_id`) VALUES ($uid, $item_id)";
 
         return $db->insert($query);
+    }
+
+    public function remove_from_cart($item_id) {
+        $db = $this->db;
+        $uid = $this->user;
+
+        $item_id = $db->clean_str($item_id);
+
+        $query = "DELETE FROM `cart` WHERE `item_id`=$item_id AND `uid`=$uid";
+        
+        return $db->delete($query);
     }
 }
 ?>

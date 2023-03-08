@@ -16,16 +16,30 @@ try {
 } catch (Exception $e) {
     echo $e;
 }
+$total = 0;
+
+if ($item_id = $_GET['del']) {
+    try {
+        $removed = $cartMethods->remove_from_cart($item_id);
+
+        if ($removed) {
+            Auth::redirectToLogin($_SERVER['PHP_SELF']);
+        }
+    } catch (Exception $e) {
+        echo $e;
+    }
+}
+
 ?>
 <div class="cart-main-container">
     <div class="cart-header">
         <h2>Cart</h2>
-        <h2>Total Rs. <span class="total-amount">1100</span></h2>
     </div>
 
     <div class="cart-items-container">
         <?php
         foreach ($data as $item) {
+            $total += $item['price'];
         ?>
         <div class="cart-card">
             <div class="cart-img-container">
@@ -40,14 +54,14 @@ try {
                     </div>
                     <div class="cart-general-info">
                         <p>Size: <span class="cart-size"><?php echo $item['size']; ?></span></p>
-                        <p>rating: <span class="cart-size">4.5</span></p>
+                        <p>Rating: <span class="cart-size">4.5</span></p>
                         <p>Color: <span class="cart-size"><?php echo $item['color']; ?></span></p>
                     </div>
                 </div>
 
                 <div class="cart-content-right">
                     <p>Rs. <span class="cart-price"><?php echo $item['price']; ?></span></p>
-                    <button class="cart-remove-btn">Remove</button>
+                    <a class="cart-remove-btn" href="?del=<?php echo $item['item_id']; ?>">Remove</a>
                 </div>
             </div>
         </div>
@@ -57,9 +71,11 @@ try {
 
     </div>
 
+    <h2>Total Rs. <span class="total-amount"><?php echo $total; ?></span></h2>
+
     <div class="cart-cart-btn-container">
-        <a href="#"><button class="btn-common">Shop More</button></a>
-        <a href="#"><button class="btn-common">Checkout</button></a>
+        <a href="./products.php"><button class="btn-common">Shop More</button></a>
+        <a href="./payment.php"><button class="btn-common">Checkout</button></a>
     </div>
 </div>
 <?php

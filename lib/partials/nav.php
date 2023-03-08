@@ -11,6 +11,9 @@
             <a href="./products.php">
                 <li>Buy</li>
             </a>
+            <a href="./rent.php">
+                <li>Rent</li>
+            </a>
             <a href="./upload.php">
                 <li>Sell</li>
             </a>
@@ -26,7 +29,7 @@
             
             if ($authNav) {
             ?>
-            <button class="nav-btn-common">Profile</button>
+            <a href="./profile.php" class="nav-btn-common">Profile</a>
             <?php
             } else {
             ?>    
