@@ -71,7 +71,7 @@ include('lib/partials/head.php');
     <div class="rental-upload-container">
         <h1>List your outfit for Rent</h1>
         <p>Enter your outfit details</p>
-        <form action="submit" class="rental-upload-form">
+        <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" class="rental-upload-form" enctype="multipart/form-data">
             <input type="text" placeholder="Title" name="name" id="name" />
             <input type="text" placeholder="Description" name="description" id="description" />
             <input type="text" placeholder="Color" name="color" id="color" />
@@ -81,9 +81,9 @@ include('lib/partials/head.php');
             <input type="text" placeholder="Fabric Material" name="fmaterial" id="fmaterial" />
             <input type="text" placeholder="Pickup Address" name="address" id="address" />
             <p>Upload an image of the product</p>
-            <input type="file" placeholder="select the image" id="uploadImg" name="uploadImg">
+            <input type="file" id="uploadImg" name="uploadImg" />
+			<button type="submit" class="rental-upload-submit-btn">Upload</button>
         </form>
-        <button class="rental-upload-submit-btn">Upload</button>
     </div>
 </div>
 <?php

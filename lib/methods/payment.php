@@ -4,7 +4,7 @@ include_once(__DIR__.'/../utils/db.php');
 include_once('auth.php');
 
 class PaymentMethods {
-    private $db;
+    private DB $db;
     private $uid;
     
     function __construct() {
@@ -25,10 +25,24 @@ class PaymentMethods {
     }
 
     public function cart_payment() {
+        $uid = $this->uid;
+        $db = $this->db;
+
+        $q1 = "SELECT * FROM `cart` WHERE `uid`=$uid";
+
+        $cart_items = $db->select_all($q1);
+
+        
+
+
+
         return null;
     }
 
     public function rent_payment($details) {
+
+        [$item_id, $fromDate, $toDate] = $details;
+
         return null;
         
     }
