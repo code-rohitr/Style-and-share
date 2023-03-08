@@ -75,8 +75,7 @@ include('lib/partials/head.php');
 					<p>Enter your outfit details</p>
 					<form class='upload-form' method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" enctype="multipart/form-data">
 						<input type="text" placeholder="Title" name="name" id="name" />
-						<input type="text" placeholder="Description" name="description"
-						id="description" />
+						<input type="text" placeholder="Description" name="description" id="description" />
 						<input type="text" placeholder="Color" name="color" id="color" />
 						<input type="text" placeholder="Size" name="size" id="size" />
 						<input type='text' placeholder='Price' name="price" id="price" />

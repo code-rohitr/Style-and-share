@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Mar 03, 2023 at 11:20 AM
+-- Generation Time: Mar 08, 2023 at 01:38 PM
 -- Server version: 5.7.26
 -- PHP Version: 7.4.2
 
@@ -28,7 +28,6 @@ USE `style_n_share`;
 -- Table structure for table `admin`
 --
 
-DROP TABLE IF EXISTS `admin`;
 CREATE TABLE `admin` (
   `aid` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
@@ -42,7 +41,6 @@ CREATE TABLE `admin` (
 -- Table structure for table `cart`
 --
 
-DROP TABLE IF EXISTS `cart`;
 CREATE TABLE `cart` (
   `id` int(11) NOT NULL,
   `uid` int(11) NOT NULL,
@@ -55,7 +53,6 @@ CREATE TABLE `cart` (
 -- Table structure for table `feedback`
 --
 
-DROP TABLE IF EXISTS `feedback`;
 CREATE TABLE `feedback` (
   `fid` int(11) NOT NULL,
   `uid` int(11) NOT NULL,
@@ -68,7 +65,6 @@ CREATE TABLE `feedback` (
 -- Table structure for table `items`
 --
 
-DROP TABLE IF EXISTS `items`;
 CREATE TABLE `items` (
   `item_id` int(11) NOT NULL,
   `owner` int(11) NOT NULL,
@@ -90,7 +86,6 @@ CREATE TABLE `items` (
 -- Table structure for table `payment`
 --
 
-DROP TABLE IF EXISTS `payment`;
 CREATE TABLE `payment` (
   `pid` int(11) NOT NULL,
   `uid` int(11) NOT NULL,
@@ -104,7 +99,6 @@ CREATE TABLE `payment` (
 -- Table structure for table `purchasedItems`
 --
 
-DROP TABLE IF EXISTS `purchasedItems`;
 CREATE TABLE `purchasedItems` (
   `id` int(11) NOT NULL,
   `item_id` int(11) NOT NULL,
@@ -117,7 +111,6 @@ CREATE TABLE `purchasedItems` (
 -- Table structure for table `purchases`
 --
 
-DROP TABLE IF EXISTS `purchases`;
 CREATE TABLE `purchases` (
   `id` int(11) NOT NULL,
   `pid` int(11) NOT NULL,
@@ -128,10 +121,42 @@ CREATE TABLE `purchases` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `rented`
+--
+
+CREATE TABLE `rented` (
+  `id` int(11) NOT NULL,
+  `item_id` int(11) NOT NULL,
+  `uid` int(11) NOT NULL,
+  `pid` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rent_items`
+--
+
+CREATE TABLE `rent_items` (
+  `item_id` int(11) NOT NULL,
+  `owner` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `color` varchar(255) NOT NULL,
+  `size` varchar(255) NOT NULL,
+  `price` int(11) NOT NULL,
+  `brand` varchar(255) NOT NULL,
+  `fmaterial` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `img` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `review`
 --
 
-DROP TABLE IF EXISTS `review`;
 CREATE TABLE `review` (
   `rid` int(11) NOT NULL,
   `item_id` int(11) NOT NULL,
@@ -145,7 +170,6 @@ CREATE TABLE `review` (
 -- Table structure for table `users`
 --
 
-DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `uid` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
@@ -211,6 +235,19 @@ ALTER TABLE `purchases`
   ADD KEY `uid` (`uid`);
 
 --
+-- Indexes for table `rented`
+--
+ALTER TABLE `rented`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `rent_items`
+--
+ALTER TABLE `rent_items`
+  ADD PRIMARY KEY (`item_id`),
+  ADD KEY `owner` (`owner`);
+
+--
 -- Indexes for table `review`
 --
 ALTER TABLE `review`
@@ -272,6 +309,18 @@ ALTER TABLE `purchases`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `rented`
+--
+ALTER TABLE `rented`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `rent_items`
+--
+ALTER TABLE `rent_items`
+  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `review`
 --
 ALTER TABLE `review`
@@ -325,6 +374,12 @@ ALTER TABLE `purchasedItems`
 ALTER TABLE `purchases`
   ADD CONSTRAINT `purchases_ibfk_1` FOREIGN KEY (`pid`) REFERENCES `payment` (`pid`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `purchases_ibfk_2` FOREIGN KEY (`uid`) REFERENCES `users` (`uid`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `rent_items`
+--
+ALTER TABLE `rent_items`
+  ADD CONSTRAINT `rent_items_ibfk_1` FOREIGN KEY (`owner`) REFERENCES `users` (`uid`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `review`
