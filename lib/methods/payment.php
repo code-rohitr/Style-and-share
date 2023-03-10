@@ -28,15 +28,16 @@ class PaymentMethods {
         $uid = $this->uid;
         $db = $this->db;
 
+        $name = $_POST["card_name"];
+        $number = $_POST["card_number"];
+
         $q1 = "SELECT * FROM `cart` WHERE `uid`=$uid";
 
-        $cart_items = $db->select_all($q1);
+        $db->select_all($q1);
 
+        $q21 = "INSERT INTO `payment`(`uid`, `amount`, `mode`) VALUES ($uid,'$name','$number')";
         
-
-
-
-        return null;
+        return $db->insert($q21);
     }
 
     public function rent_payment($details) {
@@ -44,7 +45,6 @@ class PaymentMethods {
         [$item_id, $fromDate, $toDate] = $details;
 
         return null;
-        
     }
 }
 

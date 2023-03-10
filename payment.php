@@ -10,7 +10,7 @@ include('lib/partials/head.php');
 ?>
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    include('lib/partials/payment.php');
+    include('lib/methods/payment.php');
 
     $rent_item = $_SESSION['rent_item'];
 
@@ -22,7 +22,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $completed = $payment->rent_payment($item_details);
         } else {
             $completed = $payment->cart_payment();
+            print_r($completed);
         }
+
     } catch (Exception $e) {
         echo $e;
     }
